@@ -12,14 +12,14 @@
 
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
-        set <- function(y){    ## modifies existing matrix
+        set <- function(y){                               ## modifies existing matrix
                  x <<- y
                  m <<- NULL
         }
         
-        get <- function() x   ## returns original matrix
+        get <- function() x                               ## returns original matrix
         setinverse <- function(inverse) m <<- inverse  
-        getinverse <- function() m  ## Returns matrix inverse
+        getinverse <- function() m                        ## Returns matrix inverse
         
         list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
 
@@ -32,21 +32,23 @@ makeCacheMatrix <- function(x = matrix()) {
 ## of the matrix and sets the value of the inverse in the cache via the setinverse function.
 
 cacheSolve <- function(x, ...) {
-        ## get the inverse matrix
+                            ## get the inverse matrix
         m <- x$getinverse()
         
-        if(!is.null(m)){  # check to see if there is cached inverse matrix
-                # if the is get the cached inverse matrix.
-                
-                message("getting cached inverse matrix") # message returned when getting cached inverse matrix
-                return(m) # cached inverse matrix                
+        if(!is.null(m)){    ## check to see if there is cached inverse matrix
+                            
+                            ## message returned when getting cached inverse matrix
+                message("getting cached inverse matrix") 
+                return(m)  ## cached inverse matrix                
         }
-        ## get matrix to calculate the inverse matrix
+                           ## get matrix to calculate the inverse matrix
         data <- x$get()
         
-        ## calculation of the inverse matrix
-        m <- solve(data)   # inverse calculation of matrix
+                           ## calculation of the inverse matrix
+        
+        m <- solve(data)   ## inverse calculation of matrix        
         x$setinverse(m)
-        ## Return a matrix that is the inverse of 'x'
-        m
+        
+        m                  ## Return a matrix that is the inverse of 'x'
+       
 }
